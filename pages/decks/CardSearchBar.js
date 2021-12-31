@@ -21,6 +21,19 @@ export default function CardSearchBar() {
     setValue(e.target.innerHTML);
   }
 
+  function createDeck() {
+    const cardIds = [];
+    for (let i = 0; i < addedCards.length; i++) {
+      const cardName = addedCards[i].split(" ");
+      axios
+        .get(`https://api.scryfall.com/cards/named?exact=${cardName}`)
+        .then((res) => {
+          cardIds.push(res.data.id);
+          console.log(cardIds);
+        });
+    }
+  }
+
   useEffect(() => {
     async function search() {
       const request = await axios.get(
@@ -62,7 +75,6 @@ export default function CardSearchBar() {
               <button type="submit">Add</button>
             </div>
           </form>
-          <p>{value}</p>
           <p onClick={dropdownClick} value={names[0]}>
             {names[0]}
           </p>
@@ -94,6 +106,7 @@ export default function CardSearchBar() {
             {names[9]}
           </p>
         </div>
+        <button onClick={createDeck}>Create Deck</button>
       </div>
       <ul className={styles.deckList}>{deckList}</ul>
     </div>

@@ -32,15 +32,6 @@ export default function Home() {
               if you already have one.
             </p>
           )}
-
-          {user == true && !user.email_verified === false ? (
-            <p>
-              Please verify your email by checking you email and following the
-              instructions sent to you.
-            </p>
-          ) : (
-            ""
-          )}
         </main>
       </div>
     </Layout>

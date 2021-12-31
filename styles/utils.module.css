@@ -79,6 +79,12 @@
   display: inline-block;
 }
 
+.dropdown > button {
+  position: fixed;
+  bottom: 100;
+  right: 100;
+}
+
 /* Dropdown Content (Hidden by Default) */
 .dropdownContent {
   display: block;
