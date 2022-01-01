@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "/styles/utils.module.css";
+import { useUser } from "@auth0/nextjs-auth0";
 
 export default function CardSearchBar() {
+  const { user } = useUser();
   const [names, setNames] = useState([]);
   const [value, setValue] = useState("");
   const [addedCards, setAddedCards] = useState([]);
+  const [deckObj, setDeckObj] = useState({});
 
   function onSubmit(e) {
     e.preventDefault();
@@ -29,8 +32,12 @@ export default function CardSearchBar() {
         .get(`https://api.scryfall.com/cards/named?exact=${cardName}`)
         .then((res) => {
           cardIds.push(res.data.id);
-          console.log(cardIds);
+          setDeckObj({
+              cardIds: cardIds,
+              userId: user.sub,
+            });
         });
+        console.log(deckObj)
     }
   }
 
