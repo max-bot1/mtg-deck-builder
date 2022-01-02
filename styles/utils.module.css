@@ -50,6 +50,7 @@
 
 .listItem {
   margin: 0 0 1.25rem;
+  display: flex;
 }
 
 .lightText {
@@ -64,8 +65,8 @@
   background-repeat: no-repeat; */
   font-size: 16px;
   padding: 14px 33px 12px 33px;
-  border: none;
-  border-bottom: 1px solid #ddd;
+  /* border: none;
+  border-bottom: 1px solid #ddd; */
 }
 
 /* The search field when it gets focus/clicked on */
@@ -130,9 +131,10 @@
   width: 100%;
 }
 
-.listItem {
+.dropdownContent > .listItem {
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
 }
 .listItem > button {
   margin-left: 1rem;
@@ -151,4 +153,10 @@
 .loginContainer > form {
   display: flex;
   flex-direction: column;
+}
+
+.deckName {
+  margin-right: auto;
+  margin-left: 2.7rem;
+  width: 10rem;
 }

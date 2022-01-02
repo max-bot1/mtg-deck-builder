@@ -5,7 +5,7 @@ import styles from "/styles/utils.module.css";
 export default function CreateDeck() {
   return (
     <Layout>
-      <h1>Here you will create a deck.</h1>
+      <h1>Create your own deck.</h1>
       {/* <div> */}
       <div>
         <CardSearchBar />
