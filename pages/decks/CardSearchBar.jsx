@@ -9,8 +9,7 @@ export default function CardSearchBar() {
   const [names, setNames] = useState([]);
   const [value, setValue] = useState("");
   const [addedCards, setAddedCards] = useState([]);
-//   const [cardIds, setCardIds] = useState([]);
-  const [deckName, setDeckName] = useState('')
+  const [deckName, setDeckName] = useState("");
 
   function onSubmit(e) {
     e.preventDefault();
@@ -30,30 +29,22 @@ export default function CardSearchBar() {
     setValue(e.target.innerHTML);
   }
 
-  function createDeck() {
-      console.log(cardIds)
+  async function createDeck() {
+    console.log(cardIds);
     const cardIds = [];
-    const cardIdPromises = []
     for (let i = 0; i < addedCards.length; i++) {
       const cardName = addedCards[i].split(" ");
-      cardIdPromises.push(axios
-        .get(`https://api.scryfall.com/cards/named?exact=${cardName}`)
-        .then((res) => {
-            cardIds.push(res.data.id)
-        }));
+      let res = await axios.get(
+        `https://api.scryfall.com/cards/named?exact=${cardName}`
+      );
+      cardIds.push(res.data.id);
     }
-    Promise.all(cardIdPromises).then(() => {
-
-        axios.post('/api/deck-handler', {
-            deck_name: deckName,
-            card_ids: cardIds,
-            user_id: user.sub,
-          }).then(res => {
-            console.log(res)
-        }).catch(err => {
-            console.log(err.message)
-        })
-    })
+    let resObj = await axios.post("/api/deck-handler", {
+      deck_name: deckName,
+      card_ids: cardIds,
+      user_id: user.sub,
+    });
+    console.log(resObj);
   }
 
   useEffect(() => {
@@ -85,7 +76,12 @@ export default function CardSearchBar() {
       <div className={styles.dropdown}>
         <div className={`${styles.dropdownContent} ${styles.myDropdown}`}>
           <form onSubmit={onSubmit} autoComplete="off">
-              <input className={styles.deckName} onChange={handleNameChange} type="text" placeholder="Name of your deck."></input>
+            <input
+              className={styles.deckName}
+              onChange={handleNameChange}
+              type="text"
+              placeholder="Name of your deck."
+            ></input>
             <div>
               <input
                 type="text"
