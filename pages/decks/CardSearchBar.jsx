@@ -2,10 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "/styles/utils.module.css";
 import { useUser } from "@auth0/nextjs-auth0";
-import { Promise } from "bluebird";
+import { useRouter } from "next/router";
 
 export default function CardSearchBar() {
   const { user } = useUser();
+  const router = useRouter();
+
   const [names, setNames] = useState([]);
   const [value, setValue] = useState("");
   const [addedCards, setAddedCards] = useState([]);
@@ -30,7 +32,6 @@ export default function CardSearchBar() {
   }
 
   async function createDeck() {
-    console.log(cardIds);
     const cardIds = [];
     for (let i = 0; i < addedCards.length; i++) {
       const cardName = addedCards[i].split(" ");
@@ -45,6 +46,7 @@ export default function CardSearchBar() {
       user_id: user.sub,
     });
     console.log(resObj);
+    router.push("/my-decks");
   }
 
   useEffect(() => {
