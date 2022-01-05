@@ -1,7 +1,4 @@
 const db = require("/db/example.js");
-// let bodyParser = require("body-parser");
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
 
 export default function getDeck(req, res) {
   let sql = "select * from deck";
