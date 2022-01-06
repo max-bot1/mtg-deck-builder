@@ -5,15 +5,12 @@ import styles from "/styles/utils.module.css";
 export default function CreateDeck() {
   return (
     <Layout>
-      <h1>Create your own deck.</h1>
-      {/* <div> */}
-      <div>
-        <CardSearchBar />
+      <div className={styles.container}>
+        <h1>Create Your Own Deck!</h1>
+        <div>
+          <CardSearchBar />
+        </div>
       </div>
-      {/* <div>
-          <input className={styles.deckList} type="text"></input>
-        </div> */}
-      {/* </div> */}
     </Layout>
   );
 }

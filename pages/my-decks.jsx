@@ -6,8 +6,7 @@ export default function MyDecks() {
   return (
     <Layout>
       <ol>
-        <li>Deck 1</li>
-        <li>Deck 2</li>
+        <a></a>
       </ol>
 
       <Link href="/decks/CreateDeck">

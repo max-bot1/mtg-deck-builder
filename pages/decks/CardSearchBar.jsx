@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "/styles/utils.module.css";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function CardSearchBar() {
   const { user } = useUser();
@@ -40,24 +41,19 @@ export default function CardSearchBar() {
       );
       cardIds.push(res.data.id);
     }
-    let resObj = await axios.post("/api/deck-handler", {
+    let resObj = await axios.post(`/api/decks`, {
       deck_name: deckName,
       card_ids: cardIds,
       user_id: user.sub,
     });
-    console.log(resObj);
-    router.push("/my-decks");
+    router.push(`/decks/${resObj.data.id}`);
   }
 
-  useEffect(() => {
-    async function search() {
-      const request = await axios.get(
-        `https://api.scryfall.com/cards/autocomplete?q=${value}`
-      );
-      setNames(request.data.data);
-      return request;
-    }
-    search();
+  useEffect(async () => {
+    const request = await axios.get(
+      `https://api.scryfall.com/cards/autocomplete?q=${value}`
+    );
+    setNames(request.data.data);
   }, [value]);
 
   function deleteCard(e) {}
@@ -65,17 +61,17 @@ export default function CardSearchBar() {
   const deckList = addedCards.map((addedCards, index) => (
     <div key={index} className={styles.listItem}>
       <li key={index + 1} onClick={deleteCard}>
+        <button key={index + 2} onClick={deleteCard}>
+          X
+        </button>
         {addedCards}
       </li>
-      <button key={index + 2} onClick={deleteCard}>
-        X
-      </button>
     </div>
   ));
 
   return (
     <div className={styles.container}>
-      <div className={styles.dropdown}>
+      <div>
         <div className={`${styles.dropdownContent} ${styles.myDropdown}`}>
           <form onSubmit={onSubmit} autoComplete="off">
             <input
@@ -93,43 +89,47 @@ export default function CardSearchBar() {
                 value={value}
                 onChange={handleChange}
               ></input>
-              <button type="submit">Add</button>
+              <button className={styles.addBtn} type="submit">
+                Add
+              </button>
             </div>
           </form>
-          <p onClick={dropdownClick} value={names[0]}>
-            {names[0]}
-          </p>
-          <p onClick={dropdownClick} value={names[1]}>
-            {names[1]}
-          </p>
-          <p onClick={dropdownClick} value={names[2]}>
-            {names[2]}
-          </p>
-          <p onClick={dropdownClick} value={names[3]}>
-            {names[3]}
-          </p>
-          <p onClick={dropdownClick} value={names[4]}>
-            {names[4]}
-          </p>
-          <p onClick={dropdownClick} value={names[5]}>
-            {names[5]}
-          </p>
-          <p onClick={dropdownClick} value={names[6]}>
-            {names[6]}
-          </p>
-          <p onClick={dropdownClick} value={names[7]}>
-            {names[7]}
-          </p>
-          <p onClick={dropdownClick} value={names[8]}>
-            {names[8]}
-          </p>
-          <p onClick={dropdownClick} value={names[9]}>
-            {names[9]}
-          </p>
+          <div>
+            <p onClick={dropdownClick} value={names[0]}>
+              {names[0]}
+            </p>
+            <p onClick={dropdownClick} value={names[1]}>
+              {names[1]}
+            </p>
+            <p onClick={dropdownClick} value={names[2]}>
+              {names[2]}
+            </p>
+            <p onClick={dropdownClick} value={names[3]}>
+              {names[3]}
+            </p>
+            <p onClick={dropdownClick} value={names[4]}>
+              {names[4]}
+            </p>
+            <p onClick={dropdownClick} value={names[5]}>
+              {names[5]}
+            </p>
+            <p onClick={dropdownClick} value={names[6]}>
+              {names[6]}
+            </p>
+            <p onClick={dropdownClick} value={names[7]}>
+              {names[7]}
+            </p>
+            <p onClick={dropdownClick} value={names[8]}>
+              {names[8]}
+            </p>
+            <p onClick={dropdownClick} value={names[9]}>
+              {names[9]}
+            </p>
+          </div>
         </div>
-        <button onClick={createDeck}>Create Deck</button>
       </div>
       <ul className={styles.deckList}>{deckList}</ul>
+      <button onClick={createDeck}>Create Deck</button>
     </div>
   );
 }
