@@ -15,8 +15,8 @@ export default function about() {
       <p>
         {" "}
         I feel that there are many deck builders out there that have features
-        that I like, so I thought I'd build one that combines all of my favorite
-        features into one that I could customize.
+        that I like, so I thought I would build one that combines all of my
+        favorite features into one that I could customize.
       </p>
       <hr />
     </Layout>

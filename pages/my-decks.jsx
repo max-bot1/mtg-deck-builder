@@ -11,10 +11,17 @@ export default function MyDecks() {
   const [decks, setDecks] = useState([]);
   const params = new URLSearchParams([["user", 5]]);
 
-  useEffect(async () => {
-    let res = await axios.get("/api/decks/getAll", params);
-    setDecks(res.data);
-  }, []);
+  //   useEffect(async () => {
+  //     let res = await axios.get("/api/decks/getAll", params);
+  //     setDecks(res.data);
+  //   }, []);
+
+  useEffect(() => {
+    async () => {
+      let res = await axios.get("/api/decks/getAll", params);
+      setDecks(res.data);
+    };
+  }, [user]);
 
   const deckList = decks.map((decks, index) => (
     <div key={index} className={styles.listItem}>
