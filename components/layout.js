@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 export const siteTitle = "Next.js Sample Website";
 
-export default function Layout({ children, home }) {
+export default function Layout({ children, home, myDecks, deck }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -54,11 +54,20 @@ export default function Layout({ children, home }) {
       </header>
       <hr />
       <main>{children}</main>
-      {!home && (
+      {!(home || deck) && (
         <div className={styles.backToHome}>
           <br />
+
           <Link href="/">
-            <a>← Back to home</a>
+            <a>← Back to Home</a>
+          </Link>
+        </div>
+      )}
+      {deck && (
+        <div>
+          <br />
+          <Link href="/my-decks">
+            <a>← Back to My Decks</a>
           </Link>
         </div>
       )}

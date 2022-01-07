@@ -27,7 +27,6 @@ const Deck = () => {
       resArr.push(res);
     }
     setCards(resArr);
-    console.log(resArr);
   }, [cardArr]);
 
   const deckList = cards.map((cards, index) => (
@@ -38,7 +37,7 @@ const Deck = () => {
   ));
 
   return (
-    <Layout>
+    <Layout deck>
       <div className={styles.container}>
         <h1>{data.deck_name}</h1>
         <div className={styles.deckListItem}>{deckList}</div>

@@ -231,3 +231,17 @@
 .title {
   display: flex;
 }
+
+.deckLink {
+  padding-left: 1rem;
+}
+
+.deckLink > .listItem > li > a {
+  color: black;
+  cursor: pointer;
+  list-style: circle;
+}
+
+.create {
+  margin-left: 2rem;
+}

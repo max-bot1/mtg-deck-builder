@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import styles from "/styles/utils.module.css";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
 export default function CardSearchBar() {
   const { user } = useUser();
