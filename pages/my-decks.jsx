@@ -9,18 +9,10 @@ import axios from "axios";
 export default function MyDecks() {
   const { user } = useUser();
   const [decks, setDecks] = useState([]);
-  const params = new URLSearchParams([["user", 5]]);
 
-  //   useEffect(async () => {
-  //     let res = await axios.get("/api/decks/getAll", params);
-  //     setDecks(res.data);
-  //   }, []);
-
-  useEffect(() => {
-    async () => {
-      let res = await axios.get("/api/decks/getAll", params);
-      setDecks(res.data);
-    };
+  useEffect(async () => {
+    let res = await axios.get("/api/decks/getAll");
+    setDecks(res.data);
   }, [user]);
 
   const deckList = decks.map((decks, index) => (
@@ -39,11 +31,16 @@ export default function MyDecks() {
   ));
   return (
     <Layout myDecks>
-      <Link href="/decks/CreateDeck">
-        <a className={styles.create}>Create a New Deck.</a>
-      </Link>
+      <div className={styles.create}>
+        <Link href="/decks/CreateDeck">
+          <a>Create a New Deck.</a>
+        </Link>
+      </div>
       <hr />
-      <h1>Your Decks</h1>
+      <div className={styles.YourDeck}>
+        <h1>Your Decks</h1>
+      </div>
+      <hr />
       <div className={styles.deckLink}>{deckList}</div>
     </Layout>
   );

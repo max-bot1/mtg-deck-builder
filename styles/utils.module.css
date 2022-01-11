@@ -243,5 +243,11 @@
 }
 
 .create {
-  margin-left: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.YourDeck > h1 {
+  margin-top: 0px;
+  margin-bottom: 0;
 }
