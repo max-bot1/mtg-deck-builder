@@ -31,8 +31,8 @@ const Deck = () => {
 
   const deckList = cards.map((cards, index) => (
     <div key={index} className={styles.listItem}>
-      <li key={index + 1}>{cards.data.name}</li>
       <button key={index + 2}>X</button>
+      <li key={index + 1}>{cards.data.name}</li>
     </div>
   ));
 

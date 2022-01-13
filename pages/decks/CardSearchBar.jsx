@@ -55,15 +55,23 @@ export default function CardSearchBar() {
     setNames(request.data.data);
   }, [value]);
 
-  function deleteCard(e) {}
+  function deleteCard(e) {
+    for (let i = 0; i < addedCards.length; i++) {
+      if (addedCards[i] === e.target.parentNode.lastChild.innerHTML) {
+        addedCards.splice(i, 1);
+        setAddedCards(addedCards);
+        setValue(" ");
+      }
+    }
+  }
 
-  const deckList = addedCards.map((addedCards, index) => (
+  const deckList = addedCards.map((card, index) => (
     <div key={index} className={styles.listItem}>
+      <button key={index + 2} onClick={deleteCard}>
+        X
+      </button>
       <li key={index + 1} onClick={deleteCard}>
-        <button key={index + 2} onClick={deleteCard}>
-          X
-        </button>
-        {addedCards}
+        {card}
       </li>
     </div>
   ));
@@ -93,7 +101,7 @@ export default function CardSearchBar() {
               </button>
             </div>
           </form>
-          <div>
+          <div className="searchList">
             <p onClick={dropdownClick} value={names[0]}>
               {names[0]}
             </p>
