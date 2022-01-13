@@ -59,8 +59,7 @@ export default function CardSearchBar() {
     for (let i = 0; i < addedCards.length; i++) {
       if (addedCards[i] === e.target.parentNode.lastChild.innerHTML) {
         addedCards.splice(i, 1);
-        setAddedCards(addedCards);
-        setValue(" ");
+        setAddedCards([...addedCards]);
       }
     }
   }
